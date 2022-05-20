@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link href="style.css" rel="stylesheet" media="all"> 
+</head>
+<body>
+    <div>
+        <input type="text" id="display" value="0" readonly>
+        <button onclick="CO()">計算回数カウント</button>
+    </div>
+    <div>
+        <button onclick="num(this.innerHTML)">7</button>
+        <button onclick="num(this.innerHTML)">8</button>
+        <button onclick="num(this.innerHTML)">9</button>
+        <button onclick="ope(this.innerHTML)">x</button>
+        <button onclick="ope(this.innerHTML)">+</button>
+    </div>
+    <div>
+        <button onclick="num(this.innerHTML)">4</button>
+        <button onclick="num(this.innerHTML)">5</button>
+        <button onclick="num(this.innerHTML)">6</button>
+        <button onclick="ope(this.innerHTML)">÷</button>
+        <button onclick="ope(this.innerHTML)">-</button>
+    </div>
+    <div>
+        <button onclick="num(this.innerHTML)">0</button>
+        <button onclick="num(this.innerHTML)">1</button>
+        <button onclick="num(this.innerHTML)">2</button>
+        <button onclick="num(this.innerHTML)">3</button>
+        <button onclick="equal()">=</button>
+        <button onclick="C()">C</button>
+        <button onclick="CE()">CE</button>
+    </div>
+    <script type="text/javascript" src="common.js"></script>
+</body>
