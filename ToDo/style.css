@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+html{
+    font-size: 16px;
+}
+h1{
+    text-align: center;
+}
+.input_form{
+    margin: 0px 30%;
+}
+.text_form{
+    width: 430px;
+    height: 20px;
+}
+#table{
+    width: 50%;
+    height: 400px;
+    margin: 0 auto;
+    background-color: aquamarine;
+}
