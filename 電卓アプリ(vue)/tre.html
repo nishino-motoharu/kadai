@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <link href="style.css" rel="stylesheet" media="all"> 
+</head>
+<body>
+    <div id="one">
+        <input type="text" id="display" value="0" readonly>
+        <!-- <button onclick="CO()">計算回数カウント</button> -->
+        <button v-on:click="CO">計算回数カウント</button>
+    </div>
+    <div id="two">
+        <!-- <button onclick="num(this.innerHTML)">7</button> -->
+        <button v-on:click="num">7</button>
+        <!-- <button onclick="num(this.innerHTML)">8</button> -->
+        <button v-on:click="num">8</button>
+        <!-- <button onclick="num(this.innerHTML)">9</button> -->
+        <button v-on:click="num">9</button>
+        <!-- <button onclick="ope(this.innerHTML)">x</button> -->
+        <button v-on:click="ope">x</button>
+        <!-- <button onclick="ope(this.innerHTML)">+</button> -->
+        <button v-on:click="ope">+</button>
+    </div>
+    <div id="tree">
+        <!-- <button onclick="num(this.innerHTML)">4</button> -->
+        <button v-on:click="num">4</button>
+        <!-- <button onclick="num(this.innerHTML)">5</button> -->
+        <button v-on:click="num">5</button>
+        <!-- <button onclick="num(this.innerHTML)">6</button> -->
+        <button v-on:click="num">6</button>
+        <!-- <button onclick="ope(this.innerHTML)">÷</button> -->
+        <button v-on:click="ope">÷</button>
+        <!-- <button onclick="ope(this.innerHTML)">-</button> -->
+        <button v-on:click="ope">-</button>
+    </div>
+    <div id="four">
+        <!-- <button onclick="num(this.innerHTML)">0</button> -->
+        <button v-on:click="num">0</button>
+        <!-- <button onclick="num(this.innerHTML)">1</button> -->
+        <button v-on:click="num">1</button>
+        <!-- <button onclick="num(this.innerHTML)">2</button> -->
+        <button v-on:click="num">2</button>
+        <!-- <button onclick="num(this.innerHTML)">3</button> -->
+        <button v-on:click="num">3</button>
+        <!-- <button onclick="equal()">=</button> -->
+        <button v-on:click="equal">=</button>
+        <!-- <button onclick="C()">C</button> -->
+        <button v-on:click="C">C</button>
+        <!-- <button onclick="CE()">CE</button> -->
+        <button v-on:click="CE">CE</button>
+    </div>
+    <script>
+        //初期状態
+        var result = "";
+        window.onload = function(){
+            result = document.getElementById('display');
+        };
+        //=判断
+        var is_calc = false;
+        //カウント変数
+        var n = 0;
+        //クリックされた値が演算子か判断
+        function ope_last(){
+            return["+","-","x","÷"].includes(result.value.toString().slice(-1));
+        };
+
+        //一段目
+        var one = new Vue({
+            el: '#one',
+            methods: {
+                CO: function(){
+                    result.value = n;
+                }
+            }
+        })
+        //二段目
+        var two = new Vue({
+            el: '#two',
+            methods: {
+                num: function(val){
+                    if(is_calc) result.value = "0";
+                    is_calc = false;
+                    if(result.value =="0" && val.target.innerHTML =="0"){
+                        result.value = "0";
+                    }else if(result.value == "0"){
+                        result.value = val.target.innerHTML;
+                    }else{
+                        result.value += val.target.innerHTML;
+                    }
+                },
+                ope: function(val){
+                    n = n + 1;
+                    if(is_calc) is_calc = false;
+                    if(ope_last()){
+                        result.value =result.value.slice(0,-1) + val.target.innerHTML;
+                    }else{
+                        result.value += val.target.innerHTML;
+                    }
+                }
+            }
+        })
+        //三段目
+        var tree = new Vue({
+            el: '#tree',
+            methods: {
+                num: function(val){
+                    if(is_calc) result.value = "0";
+                    is_calc = false;
+                    if(result.value =="0" && val.target.innerHTML =="0"){
+                        result.value = "0";
+                    }else if(result.value == "0"){
+                        result.value = val.target.innerHTML;
+                    }else{
+                        result.value += val.target.innerHTML;
+                    }
+                },
+                ope: function(val){
+                    n = n + 1;
+                    if(is_calc) is_calc = false;
+                    if(ope_last()){
+                        result.value =result.value.slice(0,-1) + val.target.innerHTML;
+                    }else{
+                        result.value += val.target.innerHTML;
+                    }
+                }
+            }
+        })
+        //四段目
+        var four = new Vue({
+            el: '#four',
+            methods: {
+                num: function(val){
+                    if(is_calc) result.value = "0";
+                    is_calc = false;
+                    //val.target.innerHTMLでクリックされた数字を取得
+                    //console.log(val.target.innerHTML)
+                    if(result.value =="0" && val.target.innerHTML =="0"){
+                        result.value = "0";
+                    }else if(result.value == "0"){
+                        result.value = val.target.innerHTML;
+                    }else{
+                        result.value += val.target.innerHTML;
+                    }
+                },
+                equal: function(){
+                    if(ope_last()) result.value = result.value.slice(0,-1);
+
+    var temp = new Function("return " + result.value.replaceAll("x","*").replaceAll("÷","/"))();
+    
+    if(temp == Infinity || Number.isNaN(temp)){
+        result.value = "Error";
+    }else{
+        result.value = temp;
+        is_calc = true;
+    }
+                },
+                C: function(){
+                    result.value = "0";
+                    is_calc = false;
+                },
+                CE: function(){
+                    result.value = result.value.slice(0,-1);
+                    is_calc = false;
+                }
+            }
+        })
+    </script>
+    <!-- <script type="text/javascript" src="common.js"></script> -->
+</body>

@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+.display{
+    width: 50%;
+    height: 5vh;
+}
+.button{
+    width: 12.3%;
+    height: 7vh;
+    font-size: 40px;
+}
